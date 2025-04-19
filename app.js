@@ -20,7 +20,7 @@ async function fetchCards() {
     fullDeck = data.cards;
 
   
-    selectedCards = fullDeck.slice(0, 32); // Use first 20 cards for the trick
+    selectedCards = fullDeck.slice(0, 30); // Use first 20 cards for the trick
 
     // Assign binary values to each card (1-20)
     selectedCards.forEach((card, i) => {

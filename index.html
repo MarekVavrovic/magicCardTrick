@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Card Magic</title>
-</head>
-<body>
-<div id="stage">
+  </head>
+  <body>
+    <div id="stage">
       <h2 id="main-title">PICK A CARD & REMEMBER IT</h2>
 
       <div id="step-1">
-        <div id="card-pick" class="card-container">
-          
-        </div>
+        <div id="card-pick" class="card-container"></div>
         <button class="btn" onclick="startTrick()">
           <i class="fa-solid fa-wand-magic-sparkles"></i> I'VE PICKED ONE
         </button>
@@ -29,11 +27,14 @@
             <i class="fa-solid fa-xmark"></i> NO
           </button>
         </div>
-        <div id="loading-spinner" class="spinner hidden"></div>
 
-        <div id="card-group" class="card-container"></div>
+       <div id="loading-spinner" class="spinner hidden"></div>
+        <div id="card-group" class="card-container">
+         
+        </div>
+          
       </div>
-      
+
       <!-- CLOSING -->
       <div id="step-3" class="hidden">
         <h2>YOU'RE THINKING OF</h2>
@@ -44,5 +45,5 @@
       </div>
     </div>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>

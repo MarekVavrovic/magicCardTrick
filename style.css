@@ -274,7 +274,7 @@ h2 {
   opacity: 0;
   transform: scale(0.6) translateY(60px);
   left: calc(50% - 75px);
-  bottom: -150px;
+  bottom: -110px;
   z-index: -6;
   transform-origin: center center;
   margin: 0;
