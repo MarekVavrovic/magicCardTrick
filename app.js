@@ -62,8 +62,13 @@ function startTrick() {
   document.getElementById("step-1").classList.add("hidden");
   document.getElementById("main-title").classList.add("hidden");
   document.getElementById("step-2").classList.remove("hidden");
+
+  // 💡 Scroll to top of the page
+  window.scrollTo({ top: 0, behavior: "smooth" });
+
   showNextGroup();
 }
+
 
 // Show the next group of cards based on binary position
 const MAX_DISPLAY_CARDS = 14;
