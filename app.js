@@ -117,17 +117,25 @@ function shuffleDeck() {
 
 
 
-// Process the user's answer
 function answer(isYes) {
+  const spinner = document.getElementById("loading-spinner");
+  spinner.classList.remove("hidden");
+
   if (isYes) answerBits += 1 << currentBit;
   currentBit++;
 
-  if (currentBit >= maxBits) {
-    revealCard();
-  } else {
-    showNextGroup();
-  }
+
+  setTimeout(() => {
+    spinner.classList.add("hidden");
+
+    if (currentBit >= maxBits) {
+      revealCard();
+    } else {
+      showNextGroup();
+    }
+  }, 600);
 }
+
 
 // Reveal the selected card with animation
 function revealCard() {
@@ -171,22 +179,7 @@ function shuffleDeck() {
   fetchCards();
 }
 
-const isThumbnail =
-  window.location.href.includes("pen") &&
-  !window.location.href.includes("edit");
-if (isThumbnail) {
-  window.addEventListener("load", () => {
-    startTrick();
-    for (let i = 0; i < maxBits; i++) {
-      setTimeout(() => {
-        answer(Math.random() < 0.5);
-      }, i * 800);
-    }
-  });
-} else {
-  // Initialize the trick
-  fetchCards();
-}
+
 
 
 window.addEventListener("DOMContentLoaded", () => {
