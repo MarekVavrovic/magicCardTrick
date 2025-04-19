@@ -85,7 +85,7 @@ function showNextGroup() {
   // Combine group + extras
   const combined = [...group, ...extras].sort(() => Math.random() - 0.5);
 
-  // ✅ No slicing here — real group cards are guaranteed to be shown
+  //  No slicing here — real group cards are guaranteed to be shown
   fanCards(groupContainer, combined);
 }
 
@@ -144,26 +144,7 @@ function revealCard() {
     mainCard.className = "main-card"; // Special class for center card
     revealContainer.appendChild(mainCard);
 
-    // Create floating background cards with delay
-    setTimeout(() => {
-      // Create multiple floating cards (8 copies)
-      for (let i = 0; i < 12; i++) {
-        const img = document.createElement("img");
-        img.src = card.image;
-        img.alt = `${card.value} of ${card.suit}`;
-
-        // Randomize starting positions
-        const randomLeft = Math.random() * 100; // Random horizontal position (0-100%)
-        const randomDelay = Math.random() * 5; // Random animation delay (0-5s)
-        const randomDuration = 8 + Math.random() * 7; // Random animation duration (8-15s)
-
-        img.style.left = `${randomLeft}%`;
-        img.style.animationDelay = `${randomDelay}s`;
-        img.style.animationDuration = `${randomDuration}s`;
-
-        revealContainer.appendChild(img);
-      }
-    }, 800); // Delay the floating cards
+    
   } else {
     revealContainer.innerHTML = `<div class="error-message">Card not found. Try again!</div>`;
   }
