@@ -126,6 +126,10 @@ function shuffleDeck() {
 }
 
 function answer(isYes) {
+  // Blur all buttons to reset visual "press"
+  document
+    .querySelectorAll("#group-controls button")
+    .forEach((btn) => btn.blur());
   if (isYes) answerBits += 1 << currentBit;
   currentBit++;
 
