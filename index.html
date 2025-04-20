@@ -42,7 +42,19 @@
         <div id="revealed-card" class="card-container final-reveal"></div>
         <button class="btn" onclick="shuffleDeck()">SHUFFLE THE DECK</button>
       </div>
+
+       <!-- NOTIFICATION -->
+    <div id="subconscious-popup" class="popup hidden">
+  <p><strong>MAGIC CARDS WOULD LIKE TO ACCESS<br />YOUR SUBCONSCIOUS MIND</strong></p>
+  <div class="popup-buttons">
+    <button onclick="handlePopup(false)">Don't Allow</button>
+    <button onclick="handlePopup(true)">OK</button>
+  </div>
+</div>
     </div>
+
+   
+
     <script src="app.js"></script>
   </body>
 </html>

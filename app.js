@@ -180,6 +180,22 @@ function shuffleDeck() {
   fetchCards();
 }
 
+
+//NOTIFICATION
+function showPopupIfFirstVisit() {
+  const hasResponded = localStorage.getItem("subconsciousConsent");
+  if (!hasResponded) {
+    document.getElementById("subconscious-popup").classList.remove("hidden");
+  }
+}
+
+function handlePopup(consent) {
+  localStorage.setItem("subconsciousConsent", consent ? "granted" : "denied");
+  document.getElementById("subconscious-popup").classList.add("hidden");
+}
+
 window.addEventListener("DOMContentLoaded", () => {
+  showPopupIfFirstVisit(); // 
   fetchCards();
 });
+
