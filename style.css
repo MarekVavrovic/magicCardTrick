@@ -158,9 +158,13 @@ p {
   cursor: pointer;
   transition: var(--transition);
 }
-.btn:hover {
-  background: var(--clr-primary-1);
-  color: var(--clr-primary-5);
+.btn:hover,
+.btn:focus {
+    color: var(--clr-white);
+}
+
+.btn:active {
+  background: blue;
 }
 
 
