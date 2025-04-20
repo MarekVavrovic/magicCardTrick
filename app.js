@@ -2,7 +2,7 @@ let selectedCards = []; // Use first 20
 let cardMap = {};
 let currentBit = 0; //0-4
 let answerBits = 0;
-const maxBits = 5; //5 bits = 32 values
+const maxBits = 4; //5 bits = 32 values
 let fullDeck = []; //all cards -52
 
 const cardPickContainer = document.getElementById("card-pick");
@@ -19,8 +19,7 @@ async function fetchCards() {
 
     fullDeck = data.cards;
 
-  
-    selectedCards = fullDeck.slice(0, 30); // Use first 20 cards for the trick
+    selectedCards = fullDeck.slice(0, 16); // Use first 16 cards for the trick
 
     // Assign binary values to each card (1-20)
     selectedCards.forEach((card, i) => {
@@ -37,22 +36,58 @@ async function fetchCards() {
     });
 
     fanCards(cardPickContainer, selectedCards);
-
   } catch (error) {
     console.error("Error fetching cards:", error);
   }
 }
 
-// Create 3-column layout for cards
-function fanCards(container, cards) {
-  container.innerHTML = ""; // Clear existing cards
+// function fanCards(container, cards) {
+//   container.innerHTML = "";
 
-  cards.forEach((card) => {
-    const img = document.createElement("img");
-    img.src = card.image;
-    img.alt = `${card.value} of ${card.suit}`;
-    img.title = `${card.value} of ${card.suit}`;
-    container.appendChild(img);
+//   cards.forEach((card, i) => {
+//     const img = document.createElement("img");
+//     img.src = card.image;
+//     img.alt = `${card.value} of ${card.suit}`;
+//     img.title = `${card.value} of ${card.suit}`;
+//     img.classList.add("fade-in");
+//     img.style.animationDelay = `${i * 50}ms`; // slight stagger
+//     container.appendChild(img);
+//   });
+// }
+
+
+function fanCards(container, cards) {
+  container.innerHTML = "";
+
+  cards.forEach((card, i) => {
+    const cardWrapper = document.createElement("div");
+    cardWrapper.classList.add("card");
+
+    const cardInner = document.createElement("div");
+    cardInner.classList.add("card-inner");
+
+    const cardFront = document.createElement("div");
+    cardFront.classList.add("card-front");
+
+    const frontImg = document.createElement("img");
+    frontImg.src = card.image;
+    frontImg.alt = `${card.value} of ${card.suit}`;
+    frontImg.title = `${card.value} of ${card.suit}`;
+    cardFront.appendChild(frontImg);
+
+    const cardBack = document.createElement("div");
+    cardBack.classList.add("card-back");
+
+    // Optional: Back design (could be a default card back or solid color)
+    cardBack.innerHTML = `<div class="back-pattern"></div>`;
+
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    cardWrapper.appendChild(cardInner);
+    container.appendChild(cardWrapper);
+
+    // Optional: Add slight animation delay
+    cardWrapper.style.animationDelay = `${i * 50}ms`;
   });
 }
 
@@ -69,32 +104,17 @@ function startTrick() {
   showNextGroup();
 }
 
-
-// Show the next group of cards based on binary position
-const MAX_DISPLAY_CARDS = 14;
-
 function showNextGroup() {
   groupContainer.innerHTML = "";
 
   const bit = 1 << currentBit;
 
-  // Group = cards that match the current bit
-  const group = selectedCards.filter((card) => (card.binaryValue & bit) !== 0);
+  const group = selectedCards
+    .filter((card) => (card.binaryValue & bit) !== 0)
+    .sort(() => Math.random() - 0.5); // shuffle the group
 
-  // Get extras to fill space
-  const availableExtras = fullDeck.filter((c) => !selectedCards.includes(c));
-  const shuffledExtras = availableExtras.sort(() => Math.random() - 0.5);
-  const maxExtras = Math.max(0, MAX_DISPLAY_CARDS - group.length);
-  const extras = shuffledExtras.slice(0, maxExtras);
-
-  // Combine group + extras
-  const combined = [...group, ...extras].sort(() => Math.random() - 0.5);
-
-  //  No slicing here — real group cards are guaranteed to be shown
-  fanCards(groupContainer, combined);
+  fanCards(groupContainer, group);
 }
-
-
 
 // Reset the trick
 function shuffleDeck() {
@@ -117,30 +137,16 @@ function shuffleDeck() {
   fetchCards();
 }
 
-
-
-
-
-
 function answer(isYes) {
-  const spinner = document.getElementById("loading-spinner");
-  spinner.classList.remove("hidden");
-
   if (isYes) answerBits += 1 << currentBit;
   currentBit++;
 
-
-  setTimeout(() => {
-    spinner.classList.add("hidden");
-
-    if (currentBit >= maxBits) {
-      revealCard();
-    } else {
-      showNextGroup();
-    }
-  }, 600);
+  if (currentBit >= maxBits) {
+    revealCard();
+  } else {
+    showNextGroup();
+  }
 }
-
 
 // Reveal the selected card with animation
 function revealCard() {
@@ -156,8 +162,6 @@ function revealCard() {
     mainCard.alt = `${card.value} of ${card.suit}`;
     mainCard.className = "main-card"; // Special class for center card
     revealContainer.appendChild(mainCard);
-
-    
   } else {
     revealContainer.innerHTML = `<div class="error-message">Card not found. Try again!</div>`;
   }
@@ -183,9 +187,6 @@ function shuffleDeck() {
   // Start fresh
   fetchCards();
 }
-
-
-
 
 window.addEventListener("DOMContentLoaded", () => {
   fetchCards();
