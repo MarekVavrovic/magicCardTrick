@@ -1,6 +1,6 @@
-let selectedCards = []; // Use first 20
+let selectedCards = []; // Use first n-cards /18
 let cardMap = {};
-let currentBit = 0; //0-4
+let currentBit = 0; //0-5
 let answerBits = 0;
 const maxBits = 5; //5 bits = 32 values
 let fullDeck = []; //all cards -52
@@ -9,7 +9,7 @@ const cardPickContainer = document.getElementById("card-pick");
 const groupContainer = document.getElementById("card-group");
 const revealContainer = document.getElementById("revealed-card");
 
-// Fetch cards from the Deck of Cards API
+// Fetch cards from the public API
 async function fetchCards() {
   try {
     const res = await fetch(
@@ -19,7 +19,7 @@ async function fetchCards() {
 
     fullDeck = data.cards;
 
-    selectedCards = fullDeck.slice(0, 18); // Use first 16 cards for the trick
+    selectedCards = fullDeck.slice(0, 18); // Use first 18 cards 
 
     // Assign binary values to each card (1-20)
     selectedCards.forEach((card, i) => {
@@ -66,7 +66,7 @@ function fanCards(container, cards) {
     const cardBack = document.createElement("div");
     cardBack.classList.add("card-back");
 
-    // Optional: Back design (could be a default card back or solid color)
+    //  Back design for cards
     cardBack.innerHTML = `<div class="back-pattern"></div>`;
 
     cardInner.appendChild(cardFront);
@@ -74,7 +74,7 @@ function fanCards(container, cards) {
     cardWrapper.appendChild(cardInner);
     container.appendChild(cardWrapper);
 
-    // Optional: Add slight animation delay
+    // slight animation delay
     cardWrapper.style.animationDelay = `${i * 50}ms`;
   });
 }

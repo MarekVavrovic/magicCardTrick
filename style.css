@@ -102,7 +102,7 @@ h1 {
   font-size: 3rem;
 }
 h2 {
-  font-size: 2rem;
+  font-size:2rem;
   margin: 2rem;
 }
 h3 {
@@ -115,7 +115,7 @@ p {
   margin-bottom: 1.25rem;
   color: var(--clr-grey-5);
 }
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 650px) {
   h1 {
     font-size: 4rem;
   }
@@ -138,21 +138,7 @@ p {
     line-height: 1;
   }
 }
-/*  global classes */
 
-/* section */
-/* .section,
-.container {
-  width: 90vw;
-  margin: 0 auto;
-  max-width: var(--max-width);
-} */
-
-@media screen and (min-width: 992px) {
-  .section {
-    width: 95vw;
-  }
-}
 
 
 .btn {
@@ -165,7 +151,7 @@ p {
   text-transform: capitalize;
   font-size: 1rem;
   letter-spacing: var(--spacing);
-  margin-top: 2rem;
+  margin-top: 1rem;
   margin-bottom: 2rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
@@ -180,7 +166,7 @@ p {
 
 /* more css */
 h2 {
-  font-size: 2.3rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: aliceblue;
   text-shadow: 0 0 15px #00f2ff, 0 0 25px #005eff;
@@ -194,7 +180,7 @@ h2 {
   justify-items: center;
   align-items: end;
   width: 100%;
-  max-width: 1000px;
+  max-width: 650px;
   margin: 2rem auto 3rem auto;
   pointer-events: none;
   overflow: hidden; /* <— important */
@@ -227,8 +213,6 @@ h2 {
   perspective: 800px;
   display: block;
 }
-
-
 
 .card-inner {
   width: 100%;
@@ -366,4 +350,9 @@ h2 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+
+@media screen and (min-width: 650px) {
+ h2{font-size:2.5rem;}
 }
