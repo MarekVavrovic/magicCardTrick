@@ -2,7 +2,7 @@ let selectedCards = []; // Use first 20
 let cardMap = {};
 let currentBit = 0; //0-4
 let answerBits = 0;
-const maxBits = 4; //5 bits = 32 values
+const maxBits = 5; //5 bits = 32 values
 let fullDeck = []; //all cards -52
 
 const cardPickContainer = document.getElementById("card-pick");
@@ -19,7 +19,7 @@ async function fetchCards() {
 
     fullDeck = data.cards;
 
-    selectedCards = fullDeck.slice(0, 16); // Use first 16 cards for the trick
+    selectedCards = fullDeck.slice(0, 18); // Use first 16 cards for the trick
 
     // Assign binary values to each card (1-20)
     selectedCards.forEach((card, i) => {
@@ -41,19 +41,7 @@ async function fetchCards() {
   }
 }
 
-// function fanCards(container, cards) {
-//   container.innerHTML = "";
 
-//   cards.forEach((card, i) => {
-//     const img = document.createElement("img");
-//     img.src = card.image;
-//     img.alt = `${card.value} of ${card.suit}`;
-//     img.title = `${card.value} of ${card.suit}`;
-//     img.classList.add("fade-in");
-//     img.style.animationDelay = `${i * 50}ms`; // slight stagger
-//     container.appendChild(img);
-//   });
-// }
 
 
 function fanCards(container, cards) {
